@@ -8,10 +8,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 public class Engine{
 
-    private MapGenerator mapGenerator;
+    public MapGenerator mapGenerator;
     private Player player;
 
     private int width;
@@ -33,6 +34,7 @@ public class Engine{
     public Engine(int width, int height) {
         Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
         player = new Player(100,300, false, null);
+        mapGenerator = new MapGenerator(this);
         this.width = screensize.width;
         this.height = screensize.height;
         System.out.println("Engine started");
@@ -42,6 +44,8 @@ public class Engine{
 
     public void update() {
     if (player == null) return;
+
+
 
     double targetX = player.getX() - width / 2;
     double targetY = player.getY() - height / 2;

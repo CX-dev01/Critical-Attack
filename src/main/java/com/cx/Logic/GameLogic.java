@@ -6,10 +6,12 @@ import com.cx.game.map.Ground;
 import com.cx.game.map.MapGenerator;
 import com.cx.gui.Canvas;
 
+import java.util.Random;
+
 import static com.cx.Logic.ImageLoader.loadImage;
 
 public class GameLogic {
-
+    private MapGenerator mapGenerator;
     private Engine engine;
 
     public GameLogic(Engine engine) {
@@ -23,16 +25,18 @@ public class GameLogic {
 
         Player player = new Player(spawnX, spawnY, false, null);
 
-        engine.setPlayer(player);   // ⭐ VERY IMPORTANT
+        engine.setPlayer(player);
         engine.getGameObject().add(player);
-        MapGenerator mapGenerator = new MapGenerator(engine);
-        mapGenerator.Generate_Map(2);
+        Random random = new Random();
+        int randomSeed = random.nextInt(1000000); // big random number
 
-        ItemManager kard = new ItemManager("kard", 1300, 683, loadImage("kard.png"));
+
+
+        ItemManager kard = new ItemManager("kard", 1000, 683, loadImage("kard.png"));
 
         engine.addItem(kard);
         engine.getGameObject().add(kard);
-
+        engine.mapGenerator.Generate_Map(randomSeed);
 
 
         canvas.repaint();
