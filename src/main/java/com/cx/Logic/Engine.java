@@ -30,6 +30,7 @@ public class Engine{
 
     private List<GameObject> gameObjects = new ArrayList<>();
     ArrayList<ItemManager> items = new ArrayList<>();
+    private List<GameObject> objects = new ArrayList<>();
 
     public Engine(int width, int height) {
         Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -113,5 +114,9 @@ public class Engine{
     public int getHeight() { return height; }
     public List<GameObject> getGameObject() {
         return gameObjects;
+    }
+    public List<GameObject> getObjects(){
+
+        return objects;
     }
 }

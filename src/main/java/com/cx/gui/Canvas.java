@@ -8,14 +8,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 public class Canvas extends JPanel {
 
     private Engine engine;
 
-
-
     int FPS = 60;
+
     public Canvas(Engine engine) {
         this.engine = engine;
 
@@ -24,6 +24,21 @@ public class Canvas extends JPanel {
 
         setFocusable(true);
 
+        new Thread(() -> {
+
+            while(true){
+
+                try {
+                    Thread.sleep(1000 / FPS);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+
+                repaint();
+
+            }
+
+        }).start();
         addKeyListener(new KeyAdapter() {
 
             @Override
@@ -60,14 +75,21 @@ public class Canvas extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        Graphics2D g2 = (Graphics2D) g;
-
-        g2.translate(-engine.getCameraX(),-engine.getCameraY());
-
         if (engine == null) return;
 
-        for (GameObject obj : engine.getGameObject()) {
-            obj.draw(g);
+        Graphics2D g2 = (Graphics2D) g;
+
+        // Camera transform
+        g2.translate(-engine.getCameraX(), -engine.getCameraY());
+
+        // Safe copy of object list (prevents ConcurrentModificationException)
+        List<GameObject> objects = List.copyOf(engine.getObjects());
+
+        // Render objects
+        for (GameObject obj : objects) {
+            if (!obj.isDead()) {
+                obj.draw(g2);
+            }
         }
     }
 }

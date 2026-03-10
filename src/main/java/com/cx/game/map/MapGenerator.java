@@ -24,7 +24,7 @@ public class MapGenerator {
         engine.getGameObject().add(ground);
 
         for (int i = 0; i < 5; i++) {
-            int x = random.nextInt(3500) + 90; // proper random range
+            int x = random.nextInt(3500) + 120; // proper random range
             Fa fa = new Fa(x, 580, 280, 280);
             engine.getGameObject().add(fa);
         }

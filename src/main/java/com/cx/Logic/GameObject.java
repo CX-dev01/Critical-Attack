@@ -9,7 +9,7 @@ public abstract class GameObject {
 
     protected int x;
     protected int y;
-
+    protected boolean isDead;
     public GameObject(int x, int y) {
         this.x = x;
         this.y = y;
@@ -22,5 +22,9 @@ public abstract class GameObject {
     public int getX() { return x; }
 
     public int getY() { return y; }
+
+    public boolean isDead() {
+        return isDead;
+    }
 }
 

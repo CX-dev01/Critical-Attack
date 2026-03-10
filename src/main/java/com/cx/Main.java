@@ -37,7 +37,7 @@ public class Main{
 
                 if (delta >= 1) {
 
-                    engine.update();
+                    engine. update();
                     canvas.repaint();
                     delta--;
                 }
