@@ -5,7 +5,6 @@ import com.cx.game.map.Fa;
 import com.cx.game.map.Ground;
 import com.cx.game.map.MapGenerator;
 import com.cx.gui.Canvas;
-import com.cx.gui.HUD;
 
 import java.util.Random;
 
@@ -26,12 +25,7 @@ public class GameLogic {
 
         Player player = new Player(p_spawnX, p_spawnY, false, null);
 
-        int stat_spawnX = engine.getWidth() / 2;
-        int stat_spawnY = engine.getHeight() / 2;
-
         engine.setPlayer(player);
-        PlayerStats p_stats = new PlayerStats();
-        HUD hud = new HUD(p_stats);
         engine.getGameObject().add(player);
         Random random = new Random();
         int randomSeed = random.nextInt(1000000); // big random number

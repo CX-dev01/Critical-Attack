@@ -1,1 +1,0 @@
-java -jar CriticalAttack.jar

@@ -9,7 +9,7 @@ echo ===============================
 
 jpackage ^
 --name CriticalAttack ^
---input "E:\CX-Projects\CriticalAttack\CriticalAttack\out\artifacts\CriticalAttack_jar" ^
+--input "out\artifacts\CriticalAttack_jar" ^
 --main-jar CriticalAttack.jar ^
 --main-class com.cx.Main ^
 --type app-image

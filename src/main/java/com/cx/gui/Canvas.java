@@ -13,7 +13,6 @@ import java.util.List;
 public class Canvas extends JPanel {
 
     private Engine engine;
-
     int FPS = 60;
 
     public Canvas(Engine engine) {
@@ -25,16 +24,18 @@ public class Canvas extends JPanel {
         setFocusable(true);
 
         new Thread(() -> {
-
+            long lastTime = System.nanoTime();
+            double nsPerFrame = 1_000_000_000.0 / FPS;
+            double delta = 0;
             while(true){
 
-                try {
-                    Thread.sleep(1000 / FPS);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
+                long now = System.nanoTime();
+                delta += (now - lastTime) / nsPerFrame;
+                lastTime = now;
+                if (delta >= 1) {
+                    repaint();
                 }
 
-                repaint();
 
             }
 
@@ -76,20 +77,17 @@ public class Canvas extends JPanel {
         super.paintComponent(g);
 
         if (engine == null) return;
-
         Graphics2D g2 = (Graphics2D) g;
 
         // Camera transform
         g2.translate(-engine.getCameraX(), -engine.getCameraY());
 
-        // Safe copy of object list (prevents ConcurrentModificationException)
-        List<GameObject> objects = List.copyOf(engine.getObjects());
-
         // Render objects
-        for (GameObject obj : objects) {
-            if (!obj.isDead()) {
-                obj.draw(g2);
+        if (engine != null) {
+            for(GameObject obj : engine.getGameObject()) {
+                obj.draw(g);
             }
         }
     }
+
 }

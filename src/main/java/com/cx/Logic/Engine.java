@@ -2,6 +2,7 @@ package com.cx.Logic;
 
 import com.cx.game.Player;
 import com.cx.game.map.MapGenerator;
+import com.cx.gui.Canvas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +15,6 @@ public class Engine{
 
     public MapGenerator mapGenerator;
     private Player player;
-
     private int width;
     private int height;
     public static final int world_Width = 3800;
@@ -44,26 +44,26 @@ public class Engine{
     public int getWidth() { return width; }
 
     public void update() {
-    if (player == null) return;
+        if (player == null) return;
 
 
 
-    double targetX = player.getX() - width / 2;
-    double targetY = player.getY() - height / 2;
+        double targetX = player.getX() - width / 2;
+        double targetY = player.getY() - height / 2;
 
-    cameraX += (targetX - cameraX) * cameraSpeed;
-    cameraX += (targetY - cameraY) * cameraSpeed;
+        cameraX += (targetX - cameraX) * cameraSpeed;
+        cameraX += (targetY - cameraY) * cameraSpeed;
 
-    if (cameraX < 0) cameraX = 0;
-    if (cameraY < 0) cameraY = 0;
+        if (cameraX < 0) cameraX = 0;
+        if (cameraY < 0) cameraY = 0;
+
 
 
 
 
         for (GameObject obj : gameObjects) {
-            obj.update();
+              obj.update();
         }
-
         checkCollisions();
         checkItemPickup();
     }
@@ -111,12 +111,12 @@ public class Engine{
     private void checkCollisions() {
         // player + items logic here
     }
-    public int getHeight() { return height; }
+
+    public int getHeight() {
+        return height;
+    }
+
     public List<GameObject> getGameObject() {
         return gameObjects;
-    }
-    public List<GameObject> getObjects(){
-
-        return objects;
     }
 }
